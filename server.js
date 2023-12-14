@@ -19,6 +19,12 @@ app.get('/',(req,res) => {
     res.send(`<h1>Welcome to the Pokemon App!</h1>`)
 })
 
+app.use(express.urlencoded({extended:false}))
+app.use((req,res,next) => {
+    next()
+})
+
+
 app.get('/pokemon',(req,res) => {
 
 
@@ -27,11 +33,16 @@ app.get('/pokemon',(req,res) => {
     //res.send(pokemon)
 })
 
-app.get('/pokemon/:id', (req,res) => {
+// app.get('/pokemon/:id', (req,res) => {
 
-    res.send(req.params.id);
+//     res.send(req.params.id);
+// })
+
+app.get('/pokemon/:indexOfPokemon',(req,res) => {
+    res.render('Show',{
+        poke:pokemon[req.params.indexOfPokemon]
+    })
 })
-
 
 
 
