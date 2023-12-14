@@ -13,23 +13,30 @@ app.set('view engine','jsx')
 app.engine('jsx',require('express-react-views').createEngine())
 
 
+app.use(express.urlencoded({extended:false}))
+app.use((req,res,next) => {
+    next()
+})
+
+app.use((req, res, next) => {
+    console.log('I run for all routes');
+    next();
+});
+
 
 app.get('/',(req,res) => {
 
     res.send(`<h1>Welcome to the Pokemon App!</h1>`)
 })
 
-app.use(express.urlencoded({extended:false}))
-app.use((req,res,next) => {
-    next()
-})
+
 
 
 app.get('/pokemon',(req,res) => {
 
 
     res.render('Index', {
-        pokemon})
+        pokemon:pokemon})
     //res.send(pokemon)
 })
 
@@ -37,6 +44,15 @@ app.get('/pokemon',(req,res) => {
 
 //     res.send(req.params.id);
 // })
+
+app.get('/pokemon/new',(req,res)=>{
+    res.render('New')
+})
+// ---------------------------------[New]
+
+app.post('/pokemon',(req,res)=>{
+    pokemon.push(req.body)
+})
 
 app.get('/pokemon/:indexOfPokemon',(req,res) => {
     res.render('Show',{
