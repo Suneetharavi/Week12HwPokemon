@@ -6,6 +6,13 @@ const app = express();
 
 const pokemon = require('./models/pokemon');
 
+//Gives View Engine
+app.set('view engine','jsx')
+//Initializes the view Engine
+
+app.engine('jsx',require('express-react-views').createEngine())
+
+
 
 app.get('/',(req,res) => {
 
@@ -14,7 +21,10 @@ app.get('/',(req,res) => {
 
 app.get('/pokemon',(req,res) => {
 
-    res.send(pokemon)
+
+    res.render('Index', {
+        pokemon})
+    //res.send(pokemon)
 })
 
 

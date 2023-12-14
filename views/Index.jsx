@@ -1,8 +1,14 @@
 import React from 'react'
 
 function Index() {
+
+    const myStyle = {
+        color: '#ffffff',
+        backgroundColor: '#000000',
+        };
+        
   return (
-    <div>Index</div>
+    <div style={myStyle}><h1>My First React Component!</h1></div>
   )
 }
 
